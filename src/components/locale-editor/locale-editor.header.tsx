@@ -1,6 +1,7 @@
 import React, {FC, useCallback, useEffect} from 'react';
 import { saveAs } from 'file-saver';
 import { Button } from '@material-ui/core';
+import { toast } from 'react-toastify';
 import { DropZone } from '../dropzone';
 import classes from './locale-editor.header.module.scss';
 import { useLocaleEditorContext } from './locale-editor.context-provider';
@@ -25,7 +26,15 @@ export const LocaleEditorHeader: FC = () => {
                 try {
                     setList(JSON.parse(event?.target?.result as any));
                 } catch (e) {
-                    console.log('e', e);
+                    toast.error(`Error: ${e?.message}`, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 }
             };
         }
@@ -39,7 +48,7 @@ export const LocaleEditorHeader: FC = () => {
         <div className={classes.wrap}>
             <DropZone
                 classNameWrap={classes.dropZoneWrap}
-                additionalTitle="Drag 'n' drop some files here, or click to select files"
+                additionalTitle="Drag 'n' drop json here, or click to select file"
                 onDrop={setFile}
             />
             <Button

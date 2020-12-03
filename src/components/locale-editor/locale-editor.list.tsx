@@ -1,6 +1,5 @@
 import React, {memo, FC, useMemo, useCallback} from 'react';
 import { AutoSizer, Column, Table } from 'react-virtualized';
-import 'react-virtualized/styles.css';
 import { useLocaleEditorContext } from './locale-editor.context-provider';
 import { Modes } from './types';
 

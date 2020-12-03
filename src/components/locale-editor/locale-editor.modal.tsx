@@ -1,5 +1,6 @@
 import React, { memo, FC, useMemo, useCallback } from 'react';
 import { Modal, TextField, Button } from '@material-ui/core';
+import { toast } from 'react-toastify';
 import { getFormFields } from '../../utils/form';
 import { useLocaleEditorContext } from './locale-editor.context-provider';
 import classes from './locale-editor.modal.module.scss';
@@ -13,13 +14,23 @@ export const LocaleEditorModal: FC = memo(() => {
     },[setModal]);
     const onSubmit = useCallback((e) => {
         e.preventDefault();
+        const newFields = getFormFields(e);
         setList(
             (l: ListItem[]) => l.map(
                 (value) => value?.id === modal?.id
-                    ? { ...value, ...getFormFields(e) }
+                    ? { ...value, ...newFields }
                     : value
             )
         );
+        toast.success(`${modal?.id} changed to ${JSON.stringify(newFields)}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
         onClose();
     }, [setList, onClose, modal]);
     return (
