@@ -13,7 +13,7 @@ export interface ListItem {
 export interface LocaleEditorContextProps {
     file: File | undefined,
     list: ListItem[];
-    modal: ListItem | undefined
+    modal: { data: ListItem | undefined, key: string } | undefined;
     mode: Modes;
     setFile: Function;
     setList: Function;

@@ -8,21 +8,21 @@ import { ListItem } from './types';
 
 export const LocaleEditorModal: FC = memo(() => {
     const { modal, setModal, setList } = useLocaleEditorContext();
-    const data = useMemo(() => modal || {} as ListItem, [modal]);
     const onClose = useCallback(() => {
         setModal(undefined);
     },[setModal]);
+    const defaultValue = useMemo(() => ((modal?.data || {}) as any)[modal?.key as string], [modal]);
     const onSubmit = useCallback((e) => {
         e.preventDefault();
         const newFields = getFormFields(e);
         setList(
             (l: ListItem[]) => l.map(
-                (value) => value?.id === modal?.id
+                (value) => value?.id === modal?.data?.id
                     ? { ...value, ...newFields }
                     : value
             )
         );
-        toast.success(`${modal?.id} changed to ${JSON.stringify(newFields)}`, {
+        toast.success(`${modal?.data?.id} changed to ${JSON.stringify(newFields)}`, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -33,13 +33,14 @@ export const LocaleEditorModal: FC = memo(() => {
         });
         onClose();
     }, [setList, onClose, modal]);
+
     return (
         <Modal
             open={!!modal}
             onClose={onClose}
         >
             <form className={classes.modal} noValidate autoComplete="off" onSubmit={onSubmit}>
-                <TextField name="message" label="message" defaultValue={data.message} />
+                <TextField name={modal?.key} label={modal?.key} defaultValue={defaultValue} />
                 <div className={classes.btns}>
                     <Button onClick={onClose} variant="contained">cancel</Button>
                     <Button type="submit" variant="contained" color="secondary">save</Button>

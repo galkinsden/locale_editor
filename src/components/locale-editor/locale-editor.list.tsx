@@ -22,9 +22,11 @@ export const LocaleEditorList: FC = memo(() => {
         }
     }, [list, mode]);
 
-    const onRowClick = useCallback((e) => {
-        setModal(e?.rowData)
-    }, [setModal]);
+    const cellRenderer = useCallback(({ rowData, dataKey }: any) => (
+        <div className={classes.cell} onClick={() => setModal({ data: rowData, key: dataKey })}>
+            {rowData[dataKey]}
+        </div>
+    ), []);
 
     return (
         <>
@@ -39,15 +41,14 @@ export const LocaleEditorList: FC = memo(() => {
                             rowStyle={{ backgroundColor: '#fff' }}
                             rowCount={listByMode.length}
                             rowGetter={({ index }) => listByMode[index]}
-                            onRowClick={onRowClick}
                         >
                             {columns.map(({ dataKey, label }) => (
                                 <Column
-                                    className={classes.cell}
                                     dataKey={dataKey}
                                     label={label}
                                     width={width/3}
                                     style={columnStyle}
+                                    cellRenderer={cellRenderer}
                                 />
                             ))}
                         </Table>
