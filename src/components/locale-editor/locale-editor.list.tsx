@@ -1,11 +1,11 @@
-import React, { memo, FC, useMemo } from 'react';
+import React, {memo, FC, useMemo, useCallback} from 'react';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 import 'react-virtualized/styles.css';
 import { useLocaleEditorContext } from './locale-editor.context-provider';
 import { Modes } from './types';
 
 export const LocaleEditorList: FC = memo(() => {
-    const { list, mode } = useLocaleEditorContext();
+    const { list, mode, setModal } = useLocaleEditorContext();
 
     const listByMode = useMemo(() => {
         switch (mode) {
@@ -17,6 +17,10 @@ export const LocaleEditorList: FC = memo(() => {
                 return list;
         }
     }, [list, mode]);
+
+    const onRowClick = useCallback((e) => {
+        setModal(e?.rowData)
+    }, [setModal]);
 
     return (
         <>
@@ -31,7 +35,7 @@ export const LocaleEditorList: FC = memo(() => {
                             rowStyle={{ backgroundColor: '#fff' }}
                             rowCount={listByMode.length}
                             rowGetter={({ index }) => listByMode[index]}
-                            onRowClick={(e: any) => console.log('e', e)}
+                            onRowClick={onRowClick}
                         >
                             <Column label="id" dataKey="id" width={width/3} />
                             <Column label="rus" dataKey="defaultMessage" width={width/3} />

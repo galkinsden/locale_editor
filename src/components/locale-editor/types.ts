@@ -6,15 +6,17 @@ export enum Modes {
 export interface ListItem {
     message?: string;
     defaultMessage: string;
-    description: string;
     files: string[];
+    id: string;
 }
 
 export interface LocaleEditorContextProps {
     file: File | undefined,
     list: ListItem[];
+    modal: ListItem | undefined
     mode: Modes;
     setFile: Function;
     setList: Function;
     setMode: Function;
+    setModal: Function;
 }

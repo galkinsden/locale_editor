@@ -1,6 +1,6 @@
 {
   "name": "locale_editor",
-  "homepage": "http://galkinsden.github.io/locale_editor",
+  "homepage": "https://galkinsden.github.io/locale_editor",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
