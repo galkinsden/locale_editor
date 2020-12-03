@@ -1,0 +1,56 @@
+.wrap {
+  background: #FFFFFF;
+  border: 1px dashed #CFD1D5;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 21px 26px 26px 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+  transition: border .24s ease-in-out;
+  cursor: pointer;
+  &_invalid {
+    border-color: #E30613;
+  }
+}
+
+.title {
+  text-decoration-line: underline;
+}
+
+.titleAdditional {
+  color: #a4a8ae;
+}
+
+.icon {
+  margin-right: 8px;
+  fill: #CFD1D5;
+}
+
+.text {
+  &_invalid {
+    color: #f50057;
+  }
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  &__text {
+    color: #49CD84;
+    text-decoration-line: underline;
+  }
+}
+
+.iconClose {
+  color: #f50057;
+  font-size: 18px;
+  margin-right: 8px;
+}
