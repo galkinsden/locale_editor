@@ -11,12 +11,12 @@ import { LocaleEditorFormatHelper } from './locale-editor.format-helper';
 export const LocaleEditor: FC = () => (
     <LocaleEditorContextProvider>
         <LocaleEditorWrap>
-            <LocaleEditorBlock height="200px">
+            <LocaleEditorBlock height="260px">
                 <LocaleEditorFormatHelper />
                 <LocaleEditorHeader />
-            </LocaleEditorBlock>
-            <LocaleEditorBlock height="100% - 200px">
                 <LocaleEditorMode />
+            </LocaleEditorBlock>
+            <LocaleEditorBlock height="100% - 260px">
                 <LocaleEditorList />
                 <LocaleEditorModal />
             </LocaleEditorBlock>
